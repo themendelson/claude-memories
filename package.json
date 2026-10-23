@@ -1,6 +1,6 @@
 {
   "name": "claude-memories",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "See, search and delete every memory Claude Code has saved on your machine",
   "keywords": [
     "claude",
