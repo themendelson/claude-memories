@@ -72,6 +72,29 @@ function SearchResults({ query }: { query: string }): ReactNode {
   );
 }
 
+function StaleBanner({
+  error,
+  loadedAt,
+  onRetry,
+}: {
+  error: string;
+  loadedAt: Date | null;
+  onRetry: () => void;
+}): ReactNode {
+  return (
+    <div className="stale-banner" role="alert">
+      <span>
+        Couldn't refresh memories ({error}).
+        {loadedAt !== null && ` Showing what was read at ${loadedAt.toLocaleTimeString()}.`} Is claude-memories still
+        running?
+      </span>
+      <button type="button" className="button" onClick={onRetry}>
+        Retry
+      </button>
+    </div>
+  );
+}
+
 export function App(): ReactNode {
   const hash = useHash();
   const route = parseRoute(hash);
@@ -101,6 +124,7 @@ export function App(): ReactNode {
           loadedAt={loadedAt}
         />
         <main className="main">
+          {error !== null && <StaleBanner error={error} loadedAt={loadedAt} onRetry={reload} />}
           {query.trim() === "" ? <RouteView route={route} /> : <SearchResults query={query} />}
         </main>
       </div>

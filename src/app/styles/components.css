@@ -241,3 +241,18 @@ a.card:hover {
 .wikilink-scope {
   font-size: 11px;
 }
+
+.stale-banner {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 32px;
+  background: var(--danger-soft);
+  color: var(--danger);
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+}
