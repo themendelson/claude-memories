@@ -1,0 +1,9 @@
+{
+  "path": ["src"],
+  "format": ["typescript", "tsx"],
+  "minTokens": 50,
+  "minLines": 5,
+  "mode": "mild",
+  "reporters": ["console"],
+  "threshold": 0
+}

@@ -1,0 +1,14 @@
+changelog:
+  exclude:
+    labels:
+      - internal
+  categories:
+    - title: Breaking changes
+      labels:
+        - breaking
+    - title: Fixes
+      labels:
+        - fix
+    - title: Improvements
+      labels:
+        - "*"

@@ -1,0 +1,81 @@
+.prose {
+  font-size: 15px;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+.prose > :first-child {
+  margin-top: 0;
+}
+.prose > :last-child {
+  margin-bottom: 0;
+}
+.prose h1,
+.prose h2,
+.prose h3 {
+  line-height: 1.3;
+  margin: 1.4em 0 0.5em;
+}
+.prose h1 {
+  font-size: 20px;
+}
+.prose h2 {
+  font-size: 17px;
+}
+.prose h3 {
+  font-size: 15px;
+}
+.prose p,
+.prose ul,
+.prose ol {
+  margin: 0.6em 0;
+}
+.prose li {
+  margin: 0.25em 0;
+}
+.prose ul,
+.prose ol {
+  padding-left: 22px;
+}
+.prose code {
+  font-family: var(--mono);
+  font-size: 0.86em;
+  background: var(--code-bg);
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+.prose pre {
+  background: var(--code-bg);
+  padding: 12px 14px;
+  border-radius: 8px;
+  overflow-x: auto;
+}
+.prose pre code {
+  background: none;
+  padding: 0;
+}
+.prose blockquote {
+  margin: 0.8em 0;
+  padding-left: 14px;
+  border-left: 3px solid var(--border);
+  color: var(--muted);
+}
+.prose table {
+  border-collapse: collapse;
+  margin: 0.8em 0;
+  display: block;
+  overflow-x: auto;
+}
+.prose th,
+.prose td {
+  border: 1px solid var(--border);
+  padding: 5px 10px;
+  text-align: left;
+}
+.prose hr {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: 1.5em 0;
+}
+.prose strong {
+  font-weight: 650;
+}

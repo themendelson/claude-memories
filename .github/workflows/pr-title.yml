@@ -1,0 +1,41 @@
+name: PR title
+
+on:
+  pull_request_target:
+    types: [opened, edited, reopened, synchronize]
+
+permissions:
+  pull-requests: write
+
+jobs:
+  pr-title:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: amannn/action-semantic-pull-request@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          types: |
+            feat
+            fix
+            perf
+            refactor
+            test
+            docs
+            ci
+            chore
+      - name: Label from title
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TITLE: ${{ github.event.pull_request.title }}
+          ISSUE: repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}
+        run: |
+          if [[ "$TITLE" =~ ^[a-z]+(\([^\)]*\))?!: ]]; then label=breaking
+          elif [[ "$TITLE" =~ ^fix(\([^\)]*\))?: ]]; then label=fix
+          elif [[ "$TITLE" =~ ^(feat|perf)(\([^\)]*\))?: ]]; then label=
+          else label=internal
+          fi
+          for stale in breaking fix internal; do
+            [ "$stale" = "$label" ] || gh api -X DELETE "$ISSUE/labels/$stale" --silent 2>/dev/null || true
+          done
+          [ -z "$label" ] || gh api "$ISSUE/labels" -f "labels[]=$label" --silent

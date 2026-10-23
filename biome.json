@@ -1,0 +1,160 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.5.15/schema.json",
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+  "files": {
+    "includes": ["**", "!**/dist", "!**/node_modules", "!test/fixtures"]
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 120
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "double",
+      "semicolons": "always"
+    }
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "preset": "recommended",
+      "style": {
+        "noNonNullAssertion": "error",
+        "useImportType": {
+          "level": "error",
+          "options": {
+            "style": "separatedType"
+          }
+        },
+        "useNodejsImportProtocol": "error",
+        "noExcessiveLinesPerFile": {
+          "level": "error",
+          "options": {
+            "maxLines": 400,
+            "skipBlankLines": true
+          }
+        },
+        "noRestrictedImports": {
+          "level": "error",
+          "options": {
+            "patterns": [
+              {
+                "group": ["../**"],
+                "message": "No ../ imports: use the # import (package.json \"imports\"), e.g. #shared/links.ts."
+              }
+            ]
+          }
+        }
+      },
+      "complexity": {
+        "noExcessiveLinesPerFunction": {
+          "level": "error",
+          "options": {
+            "maxLines": 60,
+            "skipBlankLines": true,
+            "skipIifes": true
+          }
+        },
+        "noExcessiveCognitiveComplexity": {
+          "level": "error",
+          "options": {
+            "maxAllowedComplexity": 20
+          }
+        }
+      },
+      "suspicious": {
+        "noExplicitAny": "error",
+        "noImportCycles": "error",
+        "noFocusedTests": "error",
+        "noSkippedTests": "error",
+        "noConsole": {
+          "level": "error",
+          "options": {
+            "allow": []
+          }
+        }
+      },
+      "correctness": {
+        "noUnusedImports": "error",
+        "noUnusedVariables": "error"
+      },
+      "nursery": {
+        "noConditionalExpect": "error",
+        "noIdenticalTestTitle": "error",
+        "useExpect": "error"
+      }
+    }
+  },
+  "overrides": [
+    {
+      "includes": ["src/app/**"],
+      "linter": {
+        "rules": {
+          "style": {
+            "noRestrictedImports": {
+              "level": "error",
+              "options": {
+                "patterns": [
+                  {
+                    "group": ["../**"],
+                    "message": "No ../ imports: use the # import (package.json \"imports\"), e.g. #shared/links.ts."
+                  },
+                  {
+                    "group": ["#server/**", "node:*"],
+                    "message": "The app runs in the browser: it talks to the server over /api and shares only #shared code."
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "includes": ["src/shared/**"],
+      "linter": {
+        "rules": {
+          "style": {
+            "noRestrictedImports": {
+              "level": "error",
+              "options": {
+                "patterns": [
+                  {
+                    "group": ["../**"],
+                    "message": "No ../ imports: use the # import (package.json \"imports\"), e.g. #shared/links.ts."
+                  },
+                  {
+                    "group": ["#server/**", "#app/**", "node:*"],
+                    "message": "Shared code runs in both the browser and Node: no server, app or node: imports."
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "includes": ["test/**", "scripts/**", "src/cli.ts"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noConsole": "off"
+          },
+          "style": {
+            "noExcessiveLinesPerFile": "off"
+          },
+          "complexity": {
+            "noExcessiveLinesPerFunction": "off"
+          }
+        }
+      }
+    }
+  ]
+}
